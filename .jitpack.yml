@@ -1,0 +1,14 @@
+jdk:
+  - openjdk21
+
+maven:
+      version: 3.6.3
+      args:
+        - -DskipTests=true
+        - -P release
+
+before_install:
+  - mvn -version
+
+install:
+  - mvn install -X -DskipTests=true
