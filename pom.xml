@@ -2,8 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.marcosbelfastdev</groupId>
-    <artifactId>fw-sample</artifactId>
-    <version>v0.1.3</version>
+    <artifactId>erbium-api</artifactId>
+    <version>v0.1.13-alpha</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
