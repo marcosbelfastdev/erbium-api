@@ -51,5 +51,8 @@ public abstract class CollectionProperties extends CollectionDependencies {
 
     DefaultTestIteratorContext defaultTestIteratorContext;
 
+    public Routers out() {
+        return workspace().out;
+    }
 
 }

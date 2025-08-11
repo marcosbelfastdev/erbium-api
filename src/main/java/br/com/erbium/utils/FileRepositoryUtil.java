@@ -268,8 +268,7 @@ public class FileRepositoryUtil {
     public static boolean isPathValid(String path) {
         String os = System.getProperty("os.name").toLowerCase();
         if (os.contains("win")) {
-            //return !path.matches(".*[<>:\"/\\\\|?*].*");
-            return true;
+            return !path.matches(".*[<>:\"/\\\\|?*].*");
         }
         return path != null && !path.trim().isEmpty();
     }

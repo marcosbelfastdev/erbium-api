@@ -13,6 +13,7 @@
 package br.com.erbium.core.base.scripts;
 
 import br.com.erbium.core.CommittedRequestProperties;
+import br.com.erbium.core.Routers;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -25,6 +26,10 @@ public abstract class SubmissionScript extends Script {
     @Getter @Setter @Accessors(fluent = true)
     protected CommittedRequestProperties committedRequestProperties;
 
+    @Getter @Setter @Accessors(fluent = true)
+    protected Routers out;
+
+
 
     /**
      * Attaches this script to the given committed request properties.
@@ -33,6 +38,7 @@ public abstract class SubmissionScript extends Script {
      */
     public void attach(CommittedRequestProperties committedRequestProperties) {
         committedRequestProperties(committedRequestProperties);
+        out(committedRequestProperties.endpoint().collectionContext().workspaceContext().out());
     }
 
 }

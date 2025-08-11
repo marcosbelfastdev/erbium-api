@@ -91,6 +91,10 @@ public class RequestManager {
     @Accessors(fluent = true)
     protected String url;
 
+    public Routers out() {
+        return parentEndpoint().out();
+    }
+
     protected void verifyMethodValidity(String method) {
         if (!Method.isValid(method.trim()))
             throw new IllegalStateException("The method '" + method + "' is not valid. Please use a valid HTTP method.");
@@ -237,7 +241,7 @@ public class RequestManager {
                 ));
 
         // 3. Pass the correctly typed map to the printer
-        System.out.println("\n" + MapPrinter.getFormattedTable(stringVariables));
+        out().log(EType.UDEF, EItem.ENVIRONMENT_TABLE, "\n" + MapPrinter.getFormattedTable(stringVariables));
 
         // You can then use the formattedTable, for example, by printing it
         ErbiumResponse response = null;

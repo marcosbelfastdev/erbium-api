@@ -69,6 +69,7 @@ public class Selector {
                 return this;
             }
         }
+        System.out.println("WARNING: Endpoint " + endpoint.name() + " was not selected.");
         return this;
     }
 

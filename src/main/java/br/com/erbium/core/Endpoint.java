@@ -72,6 +72,12 @@ public class Endpoint extends EndpointProperties implements ISubmission {
      * @return the parent Workspace
      */
     public Workspace workspaceContext() {
+        if (parentCollection() == null) {
+            throw new IllegalStateException("This endpoint is not assigned to a collection and workspace.");
+        }
+        if (parentCollection().workspace() == null) {
+            throw new IllegalStateException("This endpoint collection is not assigned to a workspace.");
+        }
         return parentCollection().workspaceContext();
     }
 
@@ -81,15 +87,10 @@ public class Endpoint extends EndpointProperties implements ISubmission {
      * @return the parent Collection
      */
     public Collection collectionContext() {
+        if (parentCollection() == null) {
+            throw new IllegalStateException("This endpoint is not assigned to a collection and workspace.");
+        }
         return parentCollection();
-    }
-
-    /**
-     * Returns this endpoint instance (for context chaining).
-     * @return this Endpoint instance
-     */
-    public Endpoint endpointContext() {
-        return this;
     }
 
     public static class Builder {
@@ -647,7 +648,7 @@ public class Endpoint extends EndpointProperties implements ISubmission {
      * Adds a request script defined by a consumer function.
      *
      * @param name     The name of the script.
-     * @param consumer The consumer function that takes a {@link BlockRequestManager}.
+     * @param consumer The consumer function that takes a {@link RequestManager}.
      * @return This {@link Endpoint} instance for fluent chaining.
      */
     public Endpoint addRequestScript(@NonNull String name, @NonNull Consumer<RequestManager> consumer) {
@@ -762,7 +763,7 @@ public class Endpoint extends EndpointProperties implements ISubmission {
      * Queues a request trigger defined by a consumer function.
      *
      * @param name     The name of the trigger.
-     * @param consumer The consumer function that takes a {@link BlockRequestManager}.
+     * @param consumer The consumer function that takes a {@link RequestManager}.
      * @return This {@link Endpoint} instance for fluent chaining.
      */
     public Endpoint queueRequestTrigger(@NonNull String name, @NonNull Consumer<RequestManager> consumer) {
@@ -930,11 +931,20 @@ public class Endpoint extends EndpointProperties implements ISubmission {
     }
 
     public Collection select() {
+        if (parentCollection() == null) {
+            throw new IllegalStateException("The selection requires the endpoint to be assigned to a collection and workspace.");
+        }
+        if (parentCollection().workspace() == null) {
+            throw new IllegalStateException("The selection requires the collection the endpoint is assigned to to be assigned to a workspace.");
+        }
         parentCollection().workspace().selector().select(this);
         return parentCollection();
     }
 
     public Collection unselect() {
+        if (parentCollection() == null || parentCollection().workspace() == null) {
+            System.out.println("WARNING: This endpoint is not in a seletion group.");
+        }
         parentCollection().workspace().selector().unselect(this);
         return parentCollection();
     }

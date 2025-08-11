@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class MapPrinter {
 
-    private static final int VALUE_COLUMN_WIDTH = 80;
+    private static final int VALUE_COLUMN_WIDTH = 120;
     private static final int KEY_COLUMN_WIDTH = 15;
 
     public static String getFormattedTable(Map<String, String> map) {
@@ -43,13 +43,13 @@ public class MapPrinter {
     }
 
     private static void appendRow(int index, String key, String value, StringBuilder tableBuilder) {
-        String[] valueLines = wrapText(value, VALUE_COLUMN_WIDTH -4);
+        String[] valueLines = wrapText(value, VALUE_COLUMN_WIDTH -1);
 
         for (int i = 0; i < valueLines.length; i++) {
             if (i == 0) {
-                tableBuilder.append(String.format("| %4d | %-15s | %-80s |\n", index, key, valueLines[i]));
+                tableBuilder.append(String.format("| %4d | %-15s | %-120s |\n", index, key, valueLines[i]));
             } else {
-                tableBuilder.append(String.format("|      | %-15s | %-80s |\n", "", valueLines[i]));
+                tableBuilder.append(String.format("|      | %-15s | %-120s |\n", "", valueLines[i]));
             }
         }
     }

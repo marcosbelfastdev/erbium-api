@@ -1,7 +1,6 @@
 package br.com.erbium.core.scripts._default.submission;
 
-import br.com.erbium.core.ErbiumResponse;
-import br.com.erbium.core.Header;
+import br.com.erbium.core.*;
 import br.com.erbium.core.Headers;
 import br.com.erbium.core.base.scripts.ErbiumSubmissionScript;
 import br.com.erbium.core.enums.RequestType;
@@ -32,6 +31,7 @@ public class ErbiumDefaultSubmissionScript extends ErbiumSubmissionScript {
     @Override
     public void run() {
 
+
         Request.Builder requestBuilder = new Request.Builder();
         requestBuilder = createRequestHeaders(requestBuilder);
         requestBuilder = createRequestUrl(requestBuilder);
@@ -43,6 +43,7 @@ public class ErbiumDefaultSubmissionScript extends ErbiumSubmissionScript {
                 committedRequestProperties.committedSslContext(),
                 committedRequestProperties.trustManager()
         );
+
 
         printRequestMethod(request);
         printUrl(request);
@@ -195,31 +196,35 @@ public class ErbiumDefaultSubmissionScript extends ErbiumSubmissionScript {
 //            return;
 //        }
 
-        System.out.println(buffer.readUtf8());
+        out().log("\n"+ buffer.readUtf8());
     }
 
     public void printRequestMethod(Request request) {
-        System.out.println(request.method());
+        out().log(EType.UDEF, EItem.REQUEST_METHOD, "\n" + request.method());
     }
 
     public void printUrl(Request request) {
-        System.out.println(request.url().url().toString());
+        out().log(EType.UDEF, EItem.REQUEST_URL, request.url().url());
     }
 
     public void printRequestHeaders(Request request) {
         for (int i = 0; i < request.headers().size(); i++) {
-            System.out.println(request.headers().name(i) + ": " + request.headers().value(i));
+            out().log(EType.UDEF, EItem.REQUEST_HEADERS, "\n" +
+                    request.headers().name(i) + ": " + request.headers().value(i));
         }
-
     }
 
     public void printResponse(ErbiumResponse erbiumResponse) {
-        System.out.println(erbiumResponse.headers() == null ? "No response" : erbiumResponse.headers().toString());
-        System.out.println(erbiumResponse.body() == null ? "No response body" : erbiumResponse.body().toString());
-        System.out.println(erbiumResponse.code());
+        String responseHeadersMessage = erbiumResponse.headers() == null ? "No response headers." : erbiumResponse.headers().toString();
+        String responseBodyMessage = erbiumResponse.body() == null ? "No response body" : erbiumResponse.body().toString();
+        int code = erbiumResponse.code();
+        out().log("\n\nRESPONSE");
+        out().log(EType.UDEF, EItem.RESPONSE_HEADERS, "\n" + responseHeadersMessage);
+        out().log(EType.UDEF, EItem.RESPONSE_BODY, "\n\n" + responseBodyMessage);
+        out().log(EType.UDEF, EItem.RESPONSE_CODE, "\n" + code);
     }
 
     public void printTime(ErbiumResponse erbiumResponse) {
-        System.out.println("Time: " + erbiumResponse.time() + " ms.");
+        out().log(EType.UDEF, EItem.MESSAGE, "\n" + erbiumResponse.time() + " ms.");
     }
 }

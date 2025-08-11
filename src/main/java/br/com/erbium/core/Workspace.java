@@ -48,6 +48,16 @@ public class Workspace extends WorkspaceProperties implements Serializable {
      * Constructs a new {@code Workspace} instance.
      */
     public Workspace() {
+        OutputConfig config = new OutputConfig();
+        DefaultConsoleRouter defaultConsoleRouter = new DefaultConsoleRouter();
+        out(new Routers(config));
+        out().add(defaultConsoleRouter);
+
+    }
+
+    public Workspace setRouters(Routers routers) {
+        out(routers);
+        return this;
     }
 
     /**

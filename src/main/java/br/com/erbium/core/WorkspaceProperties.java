@@ -2,6 +2,7 @@ package br.com.erbium.core;
 
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.util.HashMap;
@@ -23,8 +24,13 @@ import java.util.Map;
 public class WorkspaceProperties extends WorkspaceDependencies {
 
 
+    @Getter @Setter @Accessors(fluent = true)
+    Routers out;
+
     @Getter @Accessors(fluent = true)
     protected Map<String, Collection> collections = new HashMap<>();
+
+
 
     WorkspaceProperties() {
 

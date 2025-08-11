@@ -26,7 +26,9 @@ public abstract class EndpointProperties extends EndpointDependencies {
         super(name);
     }
 
-
+    public Routers out() {
+        return parentCollection().workspace().out;
+    }
 
 
 }
