@@ -880,7 +880,7 @@ public class Endpoint extends EndpointProperties implements ISubmission {
      * @return The {@link ResponseScript} instance, or null if not found or type mismatch.
      */
     public <T extends ResponseScript> T getResponseScript(@NonNull Class<T> clazz) {
-        return responseManager().getResponseScript(name, clazz);
+        return responseManager().getResponseScript(clazz);
     }
 
     /**

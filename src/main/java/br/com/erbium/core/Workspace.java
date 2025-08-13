@@ -52,7 +52,7 @@ public class Workspace extends WorkspaceProperties implements Serializable {
         DefaultConsoleRouter defaultConsoleRouter = new DefaultConsoleRouter();
         out(new Routers(config));
         out().add(defaultConsoleRouter);
-
+        StringUtil.printErbiumLogo();
     }
 
     public Workspace setRouters(Routers routers) {

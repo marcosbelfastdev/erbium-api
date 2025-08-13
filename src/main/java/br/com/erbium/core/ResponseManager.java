@@ -369,6 +369,10 @@ public class ResponseManager implements ResponseManagerOperator {
         return this;
     }
 
+    public Routers out() {
+        return parentEndpoint().out();
+    }
+
     public ResponseManager print(@NonNull String... messages) {
         StringUtil.print(messages);
         return this;

@@ -230,18 +230,21 @@ public class RequestManager {
             commit();
         }
 
-        // 1. Get the original map with Object values
-        Map<String, Object> allVariables = parentEndpoint().parentCollection().collectionEnvironment().getAllVariables();
+        boolean printEnvironmentTable = out().getOutputConfiguration().getDestination(EItem.ENVIRONMENT_TABLE) != TargetOutput.NONE;
+        if (printEnvironmentTable) {
+            // 1. Get the original map with Object values
+            Map<String, Object> allVariables = parentEndpoint().parentCollection().collectionEnvironment().getAllVariables();
 
-        // 2. Convert it to a Map<String, String> using a stream
-        Map<String, String> stringVariables = allVariables.entrySet().stream()
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        entry -> String.valueOf(entry.getValue()) // Safely handles nulls and other types
-                ));
+            // 2. Convert it to a Map<String, String> using a stream
+            Map<String, String> stringVariables = allVariables.entrySet().stream()
+                    .collect(Collectors.toMap(
+                            Map.Entry::getKey,
+                            entry -> String.valueOf(entry.getValue()) // Safely handles nulls and other types
+                    ));
 
-        // 3. Pass the correctly typed map to the printer
-        out().log(EType.UDEF, EItem.ENVIRONMENT_TABLE, "\n" + MapPrinter.getFormattedTable(stringVariables));
+            // 3. Pass the correctly typed map to the printer
+            out().log(EType.UDEF, EItem.ENVIRONMENT_TABLE, "\n\n" + MapPrinter.getFormattedTable(stringVariables) + "\n");
+        }
 
         // You can then use the formattedTable, for example, by printing it
         ErbiumResponse response = null;

@@ -2,8 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.marcosbelfastdev</groupId>
-    <artifactId>erbium-api</artifactId>
-    <version>v0.2.0-alpha</version>
+    <artifactId>fw-sample</artifactId>
+    <version>v0.1.3</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -218,6 +218,7 @@
                     <!-- Add this configuration block -->
                     <configuration>
                         <release>21</release>
+<!--                        <compilerArgs>&#45;&#45;enable-preview</compilerArgs>-->
                         <fork>true</fork>
                         <annotationProcessorPaths>
                             <path>

@@ -1,6 +1,7 @@
 package br.com.erbium.core.interfaces;
 
 import br.com.erbium.core.ErbiumResponse;
+import br.com.erbium.core.Routers;
 import lombok.NonNull;
 
 /**
@@ -21,6 +22,6 @@ public interface ResponseManagerOperator {
     public ResponseManagerOperator qrset(@NonNull String varName, @NonNull String jsonPath);
     public ResponseManagerOperator rset(@NonNull String varName, @NonNull String jsonPath);
     public Object get(@NonNull String varName);
-
-
+    Routers out();
+    
 }

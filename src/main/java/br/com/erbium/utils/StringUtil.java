@@ -32,6 +32,7 @@ public class StringUtil {
                 88           88    `8b    88      `8b  88  88        88  88   `8b d8'   88               \s
                 88           88     `8b   88      a8P  88  Y8a.    .a8P  88    `888'    88               \s
                 88888888888  88      `8b  88888888P"   88   `"Y8888Y"'   88     `8'     88\s
+                Testing Framework
                 """;
         System.out.println(erbium);
     }

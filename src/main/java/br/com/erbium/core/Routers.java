@@ -18,6 +18,10 @@ public final class Routers {
         this.config = config;
     }
 
+    public OutputConfig getOutputConfiguration() {
+        return config;
+    }
+
     public void add(ReportRouter router) {
         routers.add(router);
     }
