@@ -239,9 +239,6 @@ public class FileRepositoryUtil {
             }
         }
 
-        if (!isPathValid(normalizedPath.toString())) {
-            throw new IOException("Invalid path format for OS: " + normalizedPath);
-        }
     }
 
     /**
@@ -257,20 +254,6 @@ public class FileRepositoryUtil {
         if (!file.isFile()) {
             throw new IOException("Not a file: " + file);
         }
-    }
-
-    /**
-     * Validates whether the given path string is valid for the current operating system.
-     *
-     * @param path Path string
-     * @return true if valid, false otherwise
-     */
-    public static boolean isPathValid(String path) {
-        String os = System.getProperty("os.name").toLowerCase();
-        if (os.contains("win")) {
-            return !path.matches(".*[<>:\"/\\\\|?*].*");
-        }
-        return path != null && !path.trim().isEmpty();
     }
 
     /**
@@ -292,7 +275,6 @@ public class FileRepositoryUtil {
                 try {
                     return action.call();
                 } finally {
-                    Thread.sleep(2000);
                     lock.unlock();
                 }
             } else {
@@ -321,24 +303,19 @@ public class FileRepositoryUtil {
      *
      * @param path The full path (including filename) where the object will be saved.
      * @return This Workspace instance for fluent chaining.
-     * @throws RuntimeException if an I/O error occurs during the save process.
+     * @throws IOException if an I/O error occurs during the save process.
      */
-    public static void save(Object object, @NonNull String path) {
-
-        Thread thread = new Thread(() -> {
-        try (FileOutputStream fileOut = new FileOutputStream(path);
-             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
-
-            out.writeObject(object);
-
-        } catch (IOException e) {
-            System.err.println("Failed to save object to path: " + path);
-            e.printStackTrace();
-        }
-    });
-
-    thread.setDaemon(true); // optional: don’t block JVM exit
-    thread.start();
-
+    public static void save(Object object, @NonNull String path) throws IOException {
+        File file = new File(path);
+        // Ensure parent directories exist, leveraging the class's own validation.
+        validatePath(path, true);
+        // Use the existing thread-safe locking mechanism for the save operation.
+        executeWithFileLock(file, () -> {
+            try (FileOutputStream fileOut = new FileOutputStream(file);
+                 ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+                out.writeObject(object);
+            }
+            return null; // IOCallable needs a return value, null is fine here.
+        });
     }
 }
