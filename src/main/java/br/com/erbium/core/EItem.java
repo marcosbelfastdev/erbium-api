@@ -2,6 +2,7 @@ package br.com.erbium.core;
 
 public enum EItem {
     MESSAGE,
+    MESSAGE_COMPLEMENT,
     REQUEST_METHOD,
     REQUEST_URL,
     REQUEST_HEADERS,

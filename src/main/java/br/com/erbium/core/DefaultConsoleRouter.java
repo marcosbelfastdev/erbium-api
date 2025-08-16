@@ -88,7 +88,7 @@ public class DefaultConsoleRouter implements ReportRouter {
             }
         }
 
-        if (!level.equals(EType.UDEF)) {
+        if (!level.equals(EType.UDEF) && !item.equals(EItem.MESSAGE_COMPLEMENT)) {
             System.out.println(message + " ");
         } else {
             System.out.print(message + " ");
