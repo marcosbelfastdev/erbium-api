@@ -87,12 +87,12 @@ public class DefaultConsoleRouter implements ReportRouter {
         }
 
         if (!level.equals(EType.UDEF)) {
-            System.out.printf(level.toString(), item.toString(), message + " ");
+            System.out.print(level.toString() + ": " + item.toString() + ": " + message + " ");
         } else {
-            System.out.printf(message + " ");
+            System.out.print(message + " ");
         }
 
-        System.out.printf(ConsoleColors.RESET);
+        System.out.print(ConsoleColors.RESET);
     }
 
     /**
