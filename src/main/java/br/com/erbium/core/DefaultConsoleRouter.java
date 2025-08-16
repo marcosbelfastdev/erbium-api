@@ -79,6 +79,10 @@ public class DefaultConsoleRouter implements ReportRouter {
                 message = BRIGHT_YELLOW + BOLD + "WARNING: " + message;
             }
 
+            if (level == EType.LIGHT_WARNING) {
+                message = YELLOW + message;
+            }
+
             if (level == EType.ERROR) {
                 message = BRIGHT_SALMON + BOLD + "ERROR: " + message;
             }
@@ -89,7 +93,7 @@ public class DefaultConsoleRouter implements ReportRouter {
         }
 
         if (!level.equals(EType.UDEF) && !item.equals(EItem.MESSAGE_COMPLEMENT)) {
-            System.out.println(message + " ");
+            System.out.print(message + " ");
         } else {
             System.out.print(message + " ");
         }
