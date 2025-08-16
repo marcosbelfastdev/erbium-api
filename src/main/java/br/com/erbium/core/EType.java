@@ -4,6 +4,7 @@ public enum EType {
 
     UDEF,
     INFO,
+    SUCESS,
     LIGHT_WARNING,// Not likely to cause errors
     WARNING, // May cause errors
     SEVERE_WARNING, // Likely to cause errors

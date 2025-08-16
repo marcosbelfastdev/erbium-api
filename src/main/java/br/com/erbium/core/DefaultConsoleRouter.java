@@ -74,22 +74,24 @@ public class DefaultConsoleRouter implements ReportRouter {
             };
         }
 
-        if (level == EType.WARNING || level == EType.SEVERE_WARNING) {
-            message = BRIGHT_YELLOW + BOLD + "WARNING: "+ message;
-        }
+        if (useColors) {
+            if (level == EType.WARNING || level == EType.SEVERE_WARNING) {
+                message = BRIGHT_YELLOW + BOLD + "WARNING: " + message;
+            }
 
-        if (level == EType.ERROR) {
-            message = BRIGHT_SALMON + BOLD + "ERROR: " + message;
-        }
+            if (level == EType.ERROR) {
+                message = BRIGHT_SALMON + BOLD + "ERROR: " + message;
+            }
 
-        if (level == EType.INFO) {
-            message = BRIGHT_GREEN + message;
+            if (level == EType.SUCESS) {
+                message = BRIGHT_GREEN + message;
+            }
         }
 
         if (!level.equals(EType.UDEF)) {
             System.out.print(level.toString() + ": " + item.toString() + ": " + message + " ");
         } else {
-            System.out.print(message + " ");
+            System.out.print("\n" + message + " ");
         }
 
         System.out.print(ConsoleColors.RESET);
