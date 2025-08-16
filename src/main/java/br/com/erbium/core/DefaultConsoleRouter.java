@@ -89,7 +89,7 @@ public class DefaultConsoleRouter implements ReportRouter {
         if (!level.equals(EType.UDEF)) {
             System.out.printf(level.toString(), item.toString(), message + " ");
         } else {
-            System.out.print(message + " ");
+            System.out.printf(message + " ");
         }
 
         System.out.printf(ConsoleColors.RESET);
