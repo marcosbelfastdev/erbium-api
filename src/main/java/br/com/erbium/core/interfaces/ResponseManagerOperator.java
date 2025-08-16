@@ -23,5 +23,6 @@ public interface ResponseManagerOperator {
     public ResponseManagerOperator rset(@NonNull String varName, @NonNull String jsonPath);
     public Object get(@NonNull String varName);
     Routers out();
-    
+
+
 }

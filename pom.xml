@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.marcosbelfastdev</groupId>
     <artifactId>erbium-api</artifactId>
-    <version>v0.3.0</version>
+    <version>v0.3.2</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

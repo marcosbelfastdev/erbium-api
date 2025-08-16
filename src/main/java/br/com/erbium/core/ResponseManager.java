@@ -289,6 +289,11 @@ public class ResponseManager implements ResponseManagerOperator {
         return parentEndpoint().parentCollection().get(varName);
     }
 
+    @Override
+    public Routers out() {
+        return parentEndpoint().parentCollection().out();
+    }
+
     // queues an auto set of variables based on response
     public ResponseManager qrset(@NonNull String varName, @NonNull String value) {
         qrsetMap().put(varName, value);
@@ -367,10 +372,6 @@ public class ResponseManager implements ResponseManagerOperator {
                 set(varName, value.toString());
         }
         return this;
-    }
-
-    public Routers out() {
-        return parentEndpoint().out();
     }
 
     public ResponseManager print(@NonNull String... messages) {

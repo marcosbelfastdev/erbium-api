@@ -13,6 +13,8 @@
 package br.com.erbium.core;
 
 
+import lombok.Getter;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +35,13 @@ import java.util.Map;
  * DefaultTestIteratorContext provides iteration context and workspace management for test execution.
  */
 public class DefaultTestIteratorContext {
+    /**
+     * -- GETTER --
+     *  Returns the current iteration number.
+     *
+     * @return the iteration number
+     */
+    @Getter
     private final int iteration;
     private final Map<String, Object> data = new HashMap<>();
 
@@ -40,14 +49,6 @@ public class DefaultTestIteratorContext {
 
     public DefaultTestIteratorContext(int iteration) {
         this.iteration = iteration;
-    }
-
-    /**
-     * Returns the current iteration number.
-     * @return the iteration number
-     */
-    public int getIteration() {
-        return iteration;
     }
 
     /**
