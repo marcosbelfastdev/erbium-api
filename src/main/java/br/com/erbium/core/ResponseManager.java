@@ -17,6 +17,7 @@ import br.com.erbium.core.base.scripts.ResponseScript;
 import br.com.erbium.core.base.scripts.ResponseTrigger;
 import br.com.erbium.core.interfaces.ResponseManagerOperator;
 import br.com.erbium.utils.StringUtil;
+import com.jayway.jsonpath.JsonPath;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
@@ -347,9 +348,17 @@ public class ResponseManager implements ResponseManagerOperator {
 
         Object value = null;
         try {
-            JsonRequest jsonReader = new JsonRequest();
-            jsonReader.setBody(responseBody);
-            value = jsonReader.read(jsonPath);
+            value = JsonPath.read(responseBody, jsonPath);
+            // Normalize JsonPath library's default types (Integer, Double, Long, String, Boolean)
+            if (value instanceof Number num) {
+                if (num instanceof Integer) {
+                    value = num.intValue();
+                } else if (num instanceof Long) {
+                    value = num.longValue();
+                } else {
+                    value = num.doubleValue();
+                }
+            }
         } catch (Exception e) {
             System.out.println("WARNING: No value found for JSON path: " + jsonPath + ". Variables were not set.");
             set(varName, null);
