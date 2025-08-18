@@ -348,7 +348,7 @@ public class ResponseManager implements ResponseManagerOperator {
         Object value = null;
         try {
             JsonRequest jsonReader = new JsonRequest();
-            jsonReader.setContext(responseBody);
+            jsonReader.setBody(responseBody);
             value = jsonReader.read(jsonPath);
         } catch (Exception e) {
             System.out.println("WARNING: No value found for JSON path: " + jsonPath + ". Variables were not set.");
