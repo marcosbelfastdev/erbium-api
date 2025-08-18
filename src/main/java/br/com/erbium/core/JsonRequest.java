@@ -59,6 +59,7 @@ public class JsonRequest extends JsonRequestModuleImporter implements IJsonReque
     @Accessors(fluent = true)
     protected String body; // original request body
     private boolean normalized;
+    String todelete;
     DocumentContext requestContext;
 
 
