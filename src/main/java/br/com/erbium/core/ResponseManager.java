@@ -349,7 +349,6 @@ public class ResponseManager implements ResponseManagerOperator {
         Object value = null;
         try {
             value = JsonPath.read(responseBody, jsonPath);
-            // Normalize JsonPath library's default types (Integer, Double, Long, String, Boolean)
             if (value instanceof Number num) {
                 if (num instanceof Integer) {
                     value = num.intValue();
