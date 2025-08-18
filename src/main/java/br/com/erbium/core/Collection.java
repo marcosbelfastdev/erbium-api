@@ -149,7 +149,7 @@ public class Collection extends CollectionProperties {
         Endpoint endpoint = Endpoint.builder()
                 .name(name)
                 .collection(this)
-                .eagerRequestValidation(true)
+                .eagerRequestValidation(false)
                 .build();
         return addEndpoint(endpoint);
     }
