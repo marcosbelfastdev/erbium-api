@@ -58,6 +58,7 @@ public class JsonRequest extends JsonRequestModuleImporter implements IJsonReque
     @Setter(AccessLevel.PACKAGE)
     @Accessors(fluent = true)
     protected String body; // original request body
+    private boolean normalized;
     DocumentContext requestContext;
 
 
@@ -634,11 +635,15 @@ public class JsonRequest extends JsonRequestModuleImporter implements IJsonReque
             }
             this.body = normalize(this.body);
             setContext();
+            normalized = true;
         }
     }
 
     private void tryNormalization() {
-        tryNormalization(false);
+        if (normalized)
+            tryNormalization(false);
+        else
+            tryNormalization(true);
     }
 
     @Override
