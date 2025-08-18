@@ -140,7 +140,6 @@ public class JsonRequest extends JsonRequestModuleImporter implements IJsonReque
 
     public JsonRequest setBody(@NonNull String body) {
         this.body = body;
-        tryNormalization(true);
         return this;
     }
 
@@ -464,6 +463,9 @@ public class JsonRequest extends JsonRequestModuleImporter implements IJsonReque
     private String normalize(@NonNull String value) {
         if (environment() == null)
             throw new IllegalArgumentException("Environment is not set because the endpoint is not assigned to a endpointsCollection. Cannot normalize value: " + value);
+        if (value == null) {
+            throw new IllegalArgumentException("Body or value is null");
+        }
         return environment().replaceVars(quoteJsonKeys(value));
     }
 
@@ -629,22 +631,9 @@ public class JsonRequest extends JsonRequestModuleImporter implements IJsonReque
         return (Collection) parentRequestManager().parentEndpoint().parentCollection();
     }
 
-    private void tryNormalization(boolean firstTime) {
-        if (getBodyContext() == null) {
-            if (firstTime && !parentRequestManager().parentEndpoint().requestManager().eagerRequestValidation()) {
-                return;
-            }
+    private void tryNormalization() {
             this.body = normalize(this.body);
             setContext();
-            normalized = true;
-        }
-    }
-
-    private void tryNormalization() {
-        if (normalized)
-            tryNormalization(false);
-        else
-            tryNormalization(true);
     }
 
     @Override
