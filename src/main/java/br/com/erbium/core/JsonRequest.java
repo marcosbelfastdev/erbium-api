@@ -442,6 +442,8 @@ public class JsonRequest extends JsonRequestModuleImporter implements IJsonReque
             createPathIfMissing(jsonPath);
             updateRequest(jsonPath, value);
             //throw new IllegalArgumentException("Failed to set value. The path '" + jsonPath + "' or a part of it does not exist or is not a valid structure for setting a value.", e);
+        } finally {
+            this.body = requestContext.toString();
         }
     }
 
