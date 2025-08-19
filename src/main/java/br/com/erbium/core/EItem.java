@@ -1,6 +1,7 @@
 package br.com.erbium.core;
 
 public enum EItem {
+    TIMER,
     MESSAGE,
     MESSAGE_COMPLEMENT,
     REQUEST_METHOD,
