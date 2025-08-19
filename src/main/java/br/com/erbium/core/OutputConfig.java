@@ -4,10 +4,10 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public final class OutputConfig {
-    private final Map<EItem, Integer> itemDestinations;
+    private final Map<LogItem, Integer> itemDestinations;
 
     public OutputConfig() {
-        this.itemDestinations = new EnumMap<>(EItem.class);
+        this.itemDestinations = new EnumMap<>(LogItem.class);
         setAllItems(TargetOutput.CONSOLE_REPORT);
     }
 
@@ -16,29 +16,29 @@ public final class OutputConfig {
      * @param destination TargetOutput value (CONSOLE, REPORT, etc.)
      */
     public OutputConfig setAllItems(int destination) {
-        for (EItem EItem : EItem.values()) {
+        for (LogItem LogItem : LogItem.values()) {
             // Skip custom items if we want to only set standard items
-            if (!EItem.name().startsWith("CUSTOM_")) {
-                itemDestinations.put(EItem, destination);
+            if (!LogItem.name().startsWith("CUSTOM_")) {
+                itemDestinations.put(LogItem, destination);
             }
         }
         return this;
     }
 
     /**
-     * Sets specific EItems to the specified destination
+     * Sets specific LogItems to the specified destination
      * @param destination TargetOutput value
-     * @param EItems EItem to configure
+     * @param LogItems LogItem to configure
      */
-    public OutputConfig set(int destination, EItem... EItems) {
-        for (EItem EItem : EItems) {
-            itemDestinations.put(EItem, destination);
+    public OutputConfig set(int destination, LogItem... LogItems) {
+        for (LogItem LogItem : LogItems) {
+            itemDestinations.put(LogItem, destination);
         }
         return this;
     }
 
-    public int getDestination(EItem EItem) {
-        return itemDestinations.getOrDefault(EItem, TargetOutput.NONE);
+    public int getDestination(LogItem LogItem) {
+        return itemDestinations.getOrDefault(LogItem, TargetOutput.NONE);
     }
 
 }

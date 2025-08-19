@@ -1,6 +1,6 @@
 package br.com.erbium.core;
 
-public enum EItem {
+public enum LogItem {
     TIMER,
     MESSAGE,
     MESSAGE_COMPLEMENT,
@@ -16,7 +16,7 @@ public enum EItem {
     // For custom items
     private static int customCounter = 0;
 
-    public static EItem newCustomItem() {
+    public static LogItem newCustomItem() {
         try {
             return valueOf("CUSTOM_" + customCounter++);
         } catch (IllegalArgumentException e) {

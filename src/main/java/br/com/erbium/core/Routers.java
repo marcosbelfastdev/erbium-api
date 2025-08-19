@@ -30,49 +30,49 @@ public final class Routers {
         routers.remove(router);
     }
 
-    public void log(EType level, EItem EItem, Object message) {
+    public void log(LogType level, LogItem LogItem, Object message) {
 
-        int destination = config.getDestination(EItem);
-        if (level == EType.ERROR || level == EType.SEVERE_WARNING) {
+        int destination = config.getDestination(LogItem);
+        if (level == LogType.ERROR || level == LogType.SEVERE_WARNING) {
             destination = TargetOutput.CONSOLE_REPORT;
         }
         String messageStr = String.valueOf(message);
 
         if (destination != TargetOutput.NONE) {
-            routeToAll(level, EItem, messageStr, destination);
+            routeToAll(level, LogItem, messageStr, destination);
         }
 
     }
 
     public void err(Object message, Throwable throwable) {
-        log(EType.ERROR, EItem.MESSAGE, String.valueOf(message));
+        log(LogType.ERROR, LogItem.MESSAGE, String.valueOf(message));
         throw new RuntimeException(throwable);
     }
 
     public void log(Object message) {
-        log(EType.UDEF, EItem.MESSAGE, message);
+        log(LogType.UDEF, LogItem.MESSAGE, message);
     }
 
-    public void log(EType level, String message) {
-        log(level, EItem.MESSAGE, message);
+    public void log(LogType level, String message) {
+        log(level, LogItem.MESSAGE, message);
     }
 
-    public void log(EItem item, String message) {
-        log(EType.UDEF, item, message);
+    public void log(LogItem item, String message) {
+        log(LogType.UDEF, item, message);
     }
 
-    private void routeToAll(EType level, EItem EItem, String message, int destination) {
+    private void routeToAll(LogType level, LogItem LogItem, String message, int destination) {
         for (ReportRouter router : routers) {
 
             if (TargetOutput.includes(destination, TargetOutput.CONSOLE)) {
                 if (router.getTargetOutput() == TargetOutput.CONSOLE) {
-                    router.route(level, EItem, message);
+                    router.route(level, LogItem, message);
                 }
             }
 
             if (TargetOutput.includes(destination, TargetOutput.REPORT)) {
                 if (router.getTargetOutput() == TargetOutput.REPORT) {
-                    router.route(level, EItem, message);
+                    router.route(level, LogItem, message);
                 }
             }
 

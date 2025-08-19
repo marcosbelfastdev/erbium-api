@@ -42,11 +42,11 @@ public class DefaultConsoleRouter implements ReportRouter {
     }
 
     /**
-     * The core routing method. It formats the message with colors based on the {@link EItem}
+     * The core routing method. It formats the message with colors based on the {@link LogItem}
      * and then prints it to the console.
      * <p>
-     * The final output format depends on the {@link EType}. Regular types are printed
-     * with a newline, whereas {@link EType#UDEF} is printed without a trailing newline
+     * The final output format depends on the {@link LogType}. Regular types are printed
+     * with a newline, whereas {@link LogType#UDEF} is printed without a trailing newline
      * to allow for building a single line of output from multiple calls.
      *
      * @param level   The severity or type of the log entry (e.g., INFO, UDEF).
@@ -54,7 +54,7 @@ public class DefaultConsoleRouter implements ReportRouter {
      * @param message The raw string message to be routed and formatted.
      */
     @Override
-    public void route(EType level, EItem item, String message) { // TODO: Rename EItem parameter to item
+    public void route(LogType level, LogItem item, String message) { // TODO: Rename LogItem parameter to item
         if (useColors) {
             message = switch (item) {
                 case REQUEST_METHOD -> switch (message.trim()) {
@@ -80,24 +80,24 @@ public class DefaultConsoleRouter implements ReportRouter {
         }
 
         if (useColors) {
-            if (level == EType.WARNING || level == EType.SEVERE_WARNING) {
+            if (level == LogType.WARNING || level == LogType.SEVERE_WARNING) {
                 message = BRIGHT_YELLOW + BOLD + "WARNING: " + message;
             }
 
-            if (level == EType.LIGHT_WARNING) {
+            if (level == LogType.LIGHT_WARNING) {
                 message = YELLOW + message;
             }
 
-            if (level == EType.ERROR) {
+            if (level == LogType.ERROR) {
                 message = BRIGHT_SALMON + BOLD + "ERROR: " + message;
             }
 
-            if (level == EType.SUCESS) {
+            if (level == LogType.SUCESS) {
                 message = BRIGHT_GREEN + message;
             }
         }
 
-        if (!level.equals(EType.UDEF) && !item.equals(EItem.MESSAGE_COMPLEMENT)) {
+        if (!level.equals(LogType.UDEF) && !item.equals(LogItem.MESSAGE_COMPLEMENT)) {
             System.out.print(message + " ");
         } else {
             System.out.print(message + " ");
@@ -108,37 +108,37 @@ public class DefaultConsoleRouter implements ReportRouter {
 
     /**
      * A convenience method to route a simple message with default levels.
-     * Defaults to {@link EType#INFO} and {@link EItem#MESSAGE}.
+     * Defaults to {@link LogType#INFO} and {@link LogItem#MESSAGE}.
      *
      * @param message The message to route.
      */
     @Override
     public void route(String message) {
-        route(EType.INFO, EItem.MESSAGE, message);
+        route(LogType.INFO, LogItem.MESSAGE, message);
     }
 
     /**
      * A convenience method to route a message with a specific level.
-     * Defaults to {@link EItem#MESSAGE}.
+     * Defaults to {@link LogItem#MESSAGE}.
      *
      * @param level   The severity or type of the log entry.
      * @param message The message to route.
      */
     @Override
-    public void route(EType level, String message) {
-        route(level, EItem.MESSAGE, message);
+    public void route(LogType level, String message) {
+        route(level, LogItem.MESSAGE, message);
     }
 
     /**
      * A convenience method to route a message for a specific item type.
-     * Defaults to {@link EType#INFO}.
+     * Defaults to {@link LogType#INFO}.
      *
      * @param item    The specific category of the message.
      * @param message The message to route.
      */
     @Override
-    public void route(EItem item, String message) {
-        route(EType.INFO, item, message);
+    public void route(LogItem item, String message) {
+        route(LogType.INFO, item, message);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package br.com.erbium.core;
 
-public enum EType {
+public enum LogType {
 
     UDEF,
     END,

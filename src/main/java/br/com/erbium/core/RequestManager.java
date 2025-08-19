@@ -230,7 +230,7 @@ public class RequestManager {
             commit();
         }
 
-        boolean printEnvironmentTable = out().getOutputConfiguration().getDestination(EItem.ENVIRONMENT_TABLE) != TargetOutput.NONE;
+        boolean printEnvironmentTable = out().getOutputConfiguration().getDestination(LogItem.ENVIRONMENT_TABLE) != TargetOutput.NONE;
         if (printEnvironmentTable) {
             // 1. Get the original map with Object values
             Map<String, Object> allVariables = parentEndpoint().parentCollection().collectionEnvironment().getAllVariables();
@@ -243,7 +243,7 @@ public class RequestManager {
                     ));
 
             // 3. Pass the correctly typed map to the printer
-            out().log(EType.UDEF, EItem.ENVIRONMENT_TABLE, "\n\n" + MapPrinter.getFormattedTable(stringVariables) + "\n");
+            out().log(LogType.UDEF, LogItem.ENVIRONMENT_TABLE, "\n\n" + MapPrinter.getFormattedTable(stringVariables) + "\n");
         }
 
         // You can then use the formattedTable, for example, by printing it

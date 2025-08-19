@@ -200,16 +200,16 @@ public class ErbiumDefaultSubmissionScript extends ErbiumSubmissionScript {
     }
 
     public void printRequestMethod(Request request) {
-        out().log(EType.UDEF, EItem.REQUEST_METHOD, "\n" + request.method());
+        out().log(LogType.UDEF, LogItem.REQUEST_METHOD, "\n" + request.method());
     }
 
     public void printUrl(Request request) {
-        out().log(EType.UDEF, EItem.REQUEST_URL, request.url().url());
+        out().log(LogType.UDEF, LogItem.REQUEST_URL, request.url().url());
     }
 
     public void printRequestHeaders(Request request) {
         for (int i = 0; i < request.headers().size(); i++) {
-            out().log(EType.UDEF, EItem.REQUEST_HEADERS, "\n" +
+            out().log(LogType.UDEF, LogItem.REQUEST_HEADERS, "\n" +
                     request.headers().name(i) + ": " + request.headers().value(i));
         }
     }
@@ -219,12 +219,12 @@ public class ErbiumDefaultSubmissionScript extends ErbiumSubmissionScript {
         String responseBodyMessage = erbiumResponse.body() == null ? "No response body" : erbiumResponse.body().toString();
         int code = erbiumResponse.code();
         out().log("\n\nRESPONSE");
-        out().log(EType.UDEF, EItem.RESPONSE_HEADERS, "\n" + responseHeadersMessage);
-        out().log(EType.UDEF, EItem.RESPONSE_BODY, "\n\n" + responseBodyMessage);
-        out().log(EType.UDEF, EItem.RESPONSE_CODE, "\n" + code);
+        out().log(LogType.UDEF, LogItem.RESPONSE_HEADERS, "\n" + responseHeadersMessage);
+        out().log(LogType.UDEF, LogItem.RESPONSE_BODY, "\n\n" + responseBodyMessage);
+        out().log(LogType.UDEF, LogItem.RESPONSE_CODE, "\n" + code);
     }
 
     public void printTime(ErbiumResponse erbiumResponse) {
-        out().log(EType.UDEF, EItem.TIMER, "\n" + erbiumResponse.time() + " ms.");
+        out().log(LogType.UDEF, LogItem.TIMER, "\n" + erbiumResponse.time() + " ms.");
     }
 }
