@@ -67,18 +67,14 @@ public final class Routers {
             if (TargetOutput.includes(destination, TargetOutput.CONSOLE)) {
                 if (router.getTargetOutput() == TargetOutput.CONSOLE) {
                     router.route(level, EItem, message);
-                    return;
                 }
             }
 
             if (TargetOutput.includes(destination, TargetOutput.REPORT)) {
                 if (router.getTargetOutput() == TargetOutput.REPORT) {
                     router.route(level, EItem, message);
-                    return;
                 }
             }
-
-            System.err.println("Failed to route message.");
 
         }
     }
