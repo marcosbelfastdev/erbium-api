@@ -3,6 +3,7 @@ package br.com.erbium.core;
 public enum EType {
 
     UDEF,
+    END,
     INFO,
     SUCESS,
     LIGHT_WARNING,// Not likely to cause errors
