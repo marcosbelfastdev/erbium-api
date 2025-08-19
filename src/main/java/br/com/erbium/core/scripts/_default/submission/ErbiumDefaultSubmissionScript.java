@@ -225,6 +225,6 @@ public class ErbiumDefaultSubmissionScript extends ErbiumSubmissionScript {
     }
 
     public void printTime(ErbiumResponse erbiumResponse) {
-        out().log(EType.UDEF, EItem.MESSAGE, "\n" + erbiumResponse.time() + " ms.");
+        out().log(EType.UDEF, EItem.TIMER, "\n" + erbiumResponse.time() + " ms.");
     }
 }
