@@ -1,6 +1,7 @@
 package br.com.erbium.core;
 
 public interface ReportRouter {
+    void commit();
     void setTargetOutput(int targetOutput);
     int getTargetOutput();
     void route(EType level, EItem item, String message);

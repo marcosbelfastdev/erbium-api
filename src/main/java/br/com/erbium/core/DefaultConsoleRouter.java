@@ -27,6 +27,11 @@ public class DefaultConsoleRouter implements ReportRouter {
     }
 
     @Override
+    public void commit() {
+
+    }
+
+    @Override
     public void setTargetOutput(int targetOutput) {
         this.targetOutput = targetOutput;
     }
