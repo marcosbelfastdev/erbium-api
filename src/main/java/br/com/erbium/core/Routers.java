@@ -31,8 +31,12 @@ public final class Routers {
     }
 
     public void log(LogType level, LogItem LogItem, Object message) {
+        log(level, LogItem, message, null);
+    }
 
-        int destination = config.getDestination(LogItem);
+    public void log(LogType level, LogItem LogItem, Object message, Integer destination) {
+
+        destination = destination == null ? config.getDestination(LogItem) : destination;
         if (level == LogType.ERROR || level == LogType.SEVERE_WARNING) {
             destination = TargetOutput.CONSOLE_REPORT;
         }
@@ -59,6 +63,42 @@ public final class Routers {
 
     public void log(LogItem item, String message) {
         log(LogType.UDEF, item, message);
+    }
+
+    public void console(Object message) {
+        log(LogType.UDEF, LogItem.MESSAGE, message, TargetOutput.CONSOLE);
+    }
+
+    public void console(LogType level, String message) {
+        log(level, LogItem.MESSAGE, message, TargetOutput.CONSOLE);
+    }
+
+    public void console(LogItem item, String message) {
+        log(LogType.UDEF, item, message, TargetOutput.CONSOLE);
+    }
+
+    public void report(Object message) {
+        log(LogType.UDEF, LogItem.MESSAGE, message, TargetOutput.REPORT);
+    }
+
+    public void report(LogType level, String message) {
+        log(level, LogItem.MESSAGE, message, TargetOutput.REPORT);
+    }
+
+    public void report(LogItem item, String message) {
+        log(LogType.UDEF, item, message, TargetOutput.REPORT);
+    }
+
+    public void all(Object message) {
+        log(LogType.UDEF, LogItem.MESSAGE, message, TargetOutput.CONSOLE_REPORT);
+    }
+
+    public void all(LogType level, String message) {
+        log(level, LogItem.MESSAGE, message, TargetOutput.CONSOLE_REPORT);
+    }
+
+    public void all(LogItem item, String message) {
+        log(LogType.UDEF, item, message, TargetOutput.CONSOLE_REPORT);
     }
 
     private void routeToAll(LogType level, LogItem LogItem, String message, int destination) {
