@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public final class Routers {
+    @Getter
     private OutputConfig config;
     @Getter
     final List<ReportRouter> routers = new CopyOnWriteArrayList<>();

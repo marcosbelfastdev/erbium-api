@@ -60,7 +60,7 @@ public class ErbiumResponse {
         this.time = time;
     }
 
-    public JsonPath jsonPath(String path) {
+    public <T> T jsonPath(String path) {
         return JsonPath.parse(body).read(path);
     }
 
